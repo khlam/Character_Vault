@@ -1,0 +1,70 @@
+/* =============
+   Global Styles
+   =============*/
+header {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: start;
+    grid-template-columns: 1fr 8fr;
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: #d7d7d7;
+    background-image: linear-gradient(
+        147deg, #d7d7d7 0%, #353535 74%);
+}
+
+img {
+    display: block;
+    max-height:100px;
+    width: auto;
+    height: auto;
+}
+
+body {
+    background-image: url("background.jpg");
+    background-repeat: repeat;
+    margin:0px;
+}
+
+.container {
+    display: inline-block;
+    border: 3px solid black;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+/* ====================
+   Character List Style
+   ==================== */
+
+/* ===============
+   Features Styles
+   =============== */
+
+/* ================
+   Stat Block Style
+   ================ */
+.statblock{
+    /* grid-column-gap: 1em; */
+    /* grid-row-gap: 1em; */
+    display:grid;
+    grid-template-columns: minmax(50px, 150px);
+}
+
+.statblock > div{
+    background:#eee;
+    padding: 1em
+}
+.statblock > div:nth-child(odd){
+    background:#ddd;
+}
+
+.stat{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid black;
+}
+
+.stat > span:first-child {
+    font-weight:bold;
+}
