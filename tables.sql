@@ -73,6 +73,17 @@ INSERT INTO `feature` VALUES ('Nose Up', 'Makes everyone in the room feel inferi
 INSERT INTO `feature` VALUES ('Revolt','Cut the head off the raining monarch.', 2);
 UNLOCK TABLES;
 
+CREATE TABLE `skill` (
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`name`)
+);
+
+LOCK TABLES `skill` WRITE;
+INSERT INTO `skill` VALUES ('Stealth', 'Your ability to hide from others');
+INSERT INTO `skill` VALUES ('Perception', 'Your ability to see what is hidden');
+UNLOCK TABLES;
+
 CREATE TABLE `character_class` (
   `character_id` int(11) NOT NULL,
   `class_id` varchar(255) NOT NULL,
