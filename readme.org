@@ -1,2 +1,2 @@
-* Domain: access.engr.oregonstate.edu
+* Domain: access.engr.oregonstate.edu/~{onid}/{port}
 * Port: 
