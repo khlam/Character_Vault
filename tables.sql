@@ -55,23 +55,24 @@ CREATE TABLE `class` (
 );
 
 LOCK TABLES `class` WRITE;
-INSERT INTO `class` VALUES ('Holy Paladin', '10', '');
-INSERT INTO `class` VALUES ('High Noble', '10', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
-INSERT INTO `class` VALUES ('Peasant', '10', '');
+INSERT INTO `class` VALUES ('Holy Paladin', 'd10', '');
+INSERT INTO `class` VALUES ('High Noble', 'd8', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
+INSERT INTO `class` VALUES ('Peasant', 'd4', '');
 UNLOCK TABLES;
 
 CREATE TABLE `character_class` (
   `character_id` int(11) NOT NULL,
   `class_id` varchar(255) NOT NULL,
+  `level` int(20) NOT NULL DEFAULT '1',
   PRIMARY KEY (`character_id`, `class_id`),
   CONSTRAINT `character_class-1` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE,
   CONSTRAINT `character_class-2` FOREIGN KEY (`class_id`) REFERENCES `class` (`name`) ON DELETE CASCADE
 );
 
 LOCK TABLES `character_class` WRITE;
-INSERT INTO `character_class` VALUES ('1', 'High Noble');
-INSERT INTO `character_class` VALUES ('1', 'Holy Paladin');
-INSERT INTO `character_class` VALUES ('2', 'Peasant');
+INSERT INTO `character_class` VALUES ('1', 'High Noble', DEFAULT);
+INSERT INTO `character_class` VALUES ('1', 'Holy Paladin', 2);
+INSERT INTO `character_class` VALUES ('2', 'Peasant', DEFAULT);
 UNLOCK TABLES;
 
 
