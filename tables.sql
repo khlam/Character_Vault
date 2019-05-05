@@ -1,9 +1,12 @@
-DROP TABLE IF EXISTS `characters`;
+-- has to be droped prior to class and character
 DROP TABLE IF EXISTS `character_class`;
-DROP TABLE IF EXISTS `class`;
+-- has to be droped prior to class and feature
 DROP TABLE IF EXISTS `class_feature`;
-DROP TABLE IF EXISTS `feature`;
+-- has to be droped prior to characters and skill
 DROP TABLE IF EXISTS `character_skill`;
+DROP TABLE IF EXISTS `class`;
+DROP TABLE IF EXISTS `characters`;
+DROP TABLE IF EXISTS `feature`;
 DROP TABLE IF EXISTS `skill`;
 DROP TABLE IF EXISTS `race`;
 
@@ -32,26 +35,11 @@ INSERT INTO `characters` VALUES (1, 1, 'High-Prophet Chad, the Rust Developer', 
 INSERT INTO `characters` VALUES (2, 1, 'Looser Paul, the Virgin C++ Coder', 'Beta-Cuck', 'No One Cares', 'cloth', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 UNLOCK TABLES;
 
-CREATE TABLE `character_class` (
-    `character_id` int(11) NOT NULL,
-    `class_id` varchar(255) NOT NULL,
-    PRIMARY KEY (`character_id`, `class_id`),
-    KEY `class_id` (`class_id`),
-    CONSTRAINT `character_class-1` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`),
-    CONSTRAINT `character_class-2` FOREIGN KEY (`class_id`) REFERENCES `class` (`name`)
-);
-
-LOCK TABLES `character_class` WRITE;
-INSERT INTO `character_class` VALUES ('1', '1');
-INSERT INTO `character_class` VALUES ('1', '2');
-INSERT INTO `character_class` VALUES ('2', '3');
-UNLOCK TABLES;
-
 CREATE TABLE `class` (
-    `name` varchar(255) NOT NULL,
-    `hit_dice` char(11) DEFAULT '0',
-    `description` varchar(255),
-    PRIMARY KEY (`name`)
+  `name` varchar(255) NOT NULL,
+  `hit_dice` char(11) DEFAULT '0',
+  `description` varchar(255),
+  PRIMARY KEY (`name`)
 );
 
 LOCK TABLES `class` WRITE;
@@ -59,6 +47,21 @@ INSERT INTO `class` VALUES ('Holy Paladin', '10', '');
 INSERT INTO `class` VALUES ('High Noble', '10', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
 INSERT INTO `class` VALUES ('Peasant', '10', '');
 UNLOCK TABLES;
+
+CREATE TABLE `character_class` (
+    `character_id` int(11) NOT NULL,
+    `class_id` varchar(255) NOT NULL,
+    PRIMARY KEY (`character_id`, `class_id`),
+    CONSTRAINT `character_class-1` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `character_class-2` FOREIGN KEY (`class_id`) REFERENCES `class` (`name`) ON DELETE CASCADE
+);
+
+LOCK TABLES `character_class` WRITE;
+INSERT INTO `character_class` VALUES ('1', 'High Noble');
+INSERT INTO `character_class` VALUES ('1', 'Holy Paladin');
+INSERT INTO `character_class` VALUES ('2', 'Peasant');
+UNLOCK TABLES;
+
 
 /*
 CREATE TABLE `class_feature` (
