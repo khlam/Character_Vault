@@ -56,7 +56,7 @@ CREATE TABLE `class` (
 
 LOCK TABLES `class` WRITE;
 INSERT INTO `class` VALUES ('Holy Paladin', 'd10', '');
-INSERT INTO `class` VALUES ('High Noble', 'd8', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
+INSERT INTO `class` VALUES ('Noble', 'd8', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
 INSERT INTO `class` VALUES ('Peasant', 'd4', '');
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `feature` (
 LOCK TABLES `feature` WRITE;
 INSERT INTO `feature` VALUES ('Lay on Hands', 'Heal the person touched for 1d6 hitpoints per caster level.', 1);
 INSERT INTO `feature` VALUES ('Nose Up', 'Makes everyone in the room feel inferior.', 1);
-INSERT INTO `feature` VALUES ('Revolt','Cut the head off the raining monarch.', 2);
+INSERT INTO `feature` VALUES ('Revolt','Cut the head off the reigning monarch.', 2);
 UNLOCK TABLES;
 
 CREATE TABLE `skill` (
@@ -94,23 +94,34 @@ CREATE TABLE `character_class` (
 );
 
 LOCK TABLES `character_class` WRITE;
-INSERT INTO `character_class` VALUES ('1', 'High Noble', DEFAULT);
+INSERT INTO `character_class` VALUES ('1', 'Noble', DEFAULT);
 INSERT INTO `character_class` VALUES ('1', 'Holy Paladin', 2);
 INSERT INTO `character_class` VALUES ('2', 'Peasant', DEFAULT);
 UNLOCK TABLES;
 
+CREATE TABLE `class_feature` (
+  `class_id` varchar(255) NOT NULL,
+  `feature_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`class_id`, `feature_id`),
+  CONSTRAINT `class_feature-1` FOREIGN KEY (`class_id`) REFERENCES `class` (`name`) ON DELETE CASCADE,
+  CONSTRAINT `class_feature-2` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`name`) ON DELETE CASCADE
+);
 
-/*
-  CREATE TABLE `class_feature` (
-  );
+LOCK TABLES `class_feature` WRITE;
+INSERT INTO `class_feature` VALUES ('Holy Paladin', 'Lay on Hands');
+INSERT INTO `class_feature` VALUES ('Noble', 'Nose Up');
+INSERT INTO `class_feature` VALUES ('Peasant', 'Revolt');
+UNLOCK TABLES;
 
-  CREATE TABLE `feature` (
-  );
+CREATE TABLE `character_skill` (
+  `character_id` int(11) NOT NULL,
+  `skill_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`character_id`, `skill_id`),
+  CONSTRAINT `character_skill-1` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `character_skill-2` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`name`) ON DELETE CASCADE
+);
 
-  CREATE TABLE `character_skill` (
-  );
-
-  CREATE TABLE `skill` (
-  );
-
- */
+LOCK TABLES `character_skill` WRITE;
+INSERT INTO `character_skill` VALUES ('1', 'Perception');
+INSERT INTO `character_skill` VALUES ('2', 'Stealth');
+UNLOCK TABLES;
