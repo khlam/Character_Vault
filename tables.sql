@@ -49,8 +49,8 @@ UNLOCK TABLES;
 
 CREATE TABLE `class` (
   `name` varchar(255) NOT NULL,
-  `hit_dice` char(11) DEFAULT '0',
-  `description` varchar(255),
+  `hit_dice` char(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`name`)
 );
 
