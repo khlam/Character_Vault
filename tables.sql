@@ -11,8 +11,8 @@ DROP TABLE IF EXISTS `skill`;
 DROP TABLE IF EXISTS `race`;
 
 CREATE TABLE `race` (
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
+  `description` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
   PRIMARY KEY (`name`)
   );
 
@@ -22,29 +22,29 @@ INSERT INTO `race` VALUES ('Human', 'Average Joe Shmoe');
 UNLOCK TABLES;
 
 CREATE TABLE `characters` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `race_id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
-  `alignment` varchar(255) DEFAULT '',
-  `armor-class` varchar(255),
-  `initiative` int(11) DEFAULT '0',
-  `speed` int(11) DEFAULT '0',
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `race_id` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
+  `name` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
+  `gender` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
+  `alignment` varchar(255) DEFAULT '', -- TODO: change schema to reflect diffrence
+  `armor-class` int (255) DEFAULT '10',
+  `initiative` int(255) DEFAULT '0',
+  `speed` int(255) DEFAULT '30',
   `healthpoints` int(11) DEFAULT '0',
-  `inspiration` int(11) DEFAULT '0',
-  `strength` int(11) DEFAULT '0',
-  `dexterity` int(11) DEFAULT '0',
-  `constitution` int(11) DEFAULT '0',
-  `intelligence` int(11) DEFAULT '0',
-  `wisdom` int(11) DEFAULT '0',
-  `charisma` int(11) DEFAULT '0',
+  `inspiration` boolean DEFAULT false,
+  `strength` int(55) DEFAULT '10',
+  `dexterity` int(55) DEFAULT '10',
+  `constitution` int(55) DEFAULT '10',
+  `intelligence` int(55) DEFAULT '10',
+  `wisdom` int(55) DEFAULT '10',
+  `charisma` int(55) DEFAULT '10',
   PRIMARY KEY (`id`),
   CONSTRAINT `characters-1` FOREIGN KEY (`race_id`) REFERENCES `race` (`name`) ON DELETE CASCADE
 );
 
 LOCK TABLES `characters` WRITE;
-INSERT INTO `characters` VALUES (NULL, 'Human', 'High-Prophet Chad, the Rust Developer', 'Alpha Male', 'Chaotic Good', 'plate', 99, 99, 99, 99, 99, 99, 99, 99, 99, 99);
-INSERT INTO `characters` VALUES (NULL, 'Dwarf', 'Looser Paul, the Virgin C++ Coder', 'Beta-Cuck', 'No One Cares', 'cloth', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+INSERT INTO `characters` VALUES (NULL, 'Human', 'High-Prophet Chad, the Rust Developer', 'Alpha Male', 'Chaotic Good', 16, 1, DEFAULT, 12, DEFAULT, 15, 12, 14, 8, DEFAULT, 15);
+INSERT INTO `characters` VALUES (NULL, 'Dwarf', 'Looser Paul, the Virgin C++ Coder', 'Beta-Cuck', 'No One Cares', NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 UNLOCK TABLES;
 
 CREATE TABLE `class` (
