@@ -60,6 +60,30 @@ INSERT INTO `class` VALUES ('High Noble', 'd8', 'Superior beings who commands su
 INSERT INTO `class` VALUES ('Peasant', 'd4', '');
 UNLOCK TABLES;
 
+CREATE TABLE `feature` (
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `level` int(20) NOT NULL,
+  PRIMARY KEY (`name`)
+);
+
+LOCK TABLES `feature` WRITE;
+INSERT INTO `feature` VALUES ('Lay on Hands', 'Heal the person touched for 1d6 hitpoints per caster level.', 1);
+INSERT INTO `feature` VALUES ('Nose Up', 'Makes everyone in the room feel inferior.', 1);
+INSERT INTO `feature` VALUES ('Revolt','Cut the head off the raining monarch.', 2);
+UNLOCK TABLES;
+
+CREATE TABLE `skill` (
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`name`)
+);
+
+LOCK TABLES `skill` WRITE;
+INSERT INTO `skill` VALUES ('Stealth', 'Your ability to hide from others');
+INSERT INTO `skill` VALUES ('Perception', 'Your ability to see what is hidden');
+UNLOCK TABLES;
+
 CREATE TABLE `character_class` (
   `character_id` int(11) NOT NULL,
   `class_id` varchar(255) NOT NULL,
