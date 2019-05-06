@@ -5,6 +5,11 @@ let app = express();
 let handlebars = require('express-handlebars').create({defaultLayout:'main'});
 let host = os.hostname();
 
+// for testing only, will be replced by data from queries
+let characterData = [
+    {name: 'Ruth'},
+    {name: 'Jim'}
+];
 
 // Used to set a directory to display any static assets like
 // style sheets and images. In this case the public dir.
@@ -16,48 +21,41 @@ app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
 
 app.get('/',function(req,res,next){
-    let context = {};
-		res.render('home',context);
+		res.status(200).render('home',{});
 });
 
 app.get('/characters',function(req,res,next){
-    let context = {};
-		res.render('characters',context);
+		res.status(200).render('characters',{
+        characterData: characterData
+    });
 });
 
 app.get('/classes',function(req,res,next){
-    let context = {};
-		res.render('classes',context);
+		res.status(200).render('classes',{});
 });
 
 app.get('/races',function(req,res,next){
-    let context = {};
-		res.render('races',context);
+		res.status(200).render('races',{});
 });
 
 app.get('/features',function(req,res,next){
-    let context = {};
-		res.render('features',context);
+		res.status(200).render('features',{});
 });
 
 app.get('/skills',function(req,res,next){
-    let context = {};
-		res.render('skills',context);
+		res.status(200).render('skills',{});
 });
 
 app.get('/character_classes',function(req,res,next){
-    let context = {};
-		res.render('character_classes',context);
+		res.status(200).render('character_classes',{});
 });
 
 app.get('/character_skills',function(req,res,next){
-    let context = {};
-		res.render('character_skills',context);
+		res.status(200).render('character_skills',{});
 });
 
 app.get('/class_features',function(req,res,next){
-    let context = {};
-		res.render('class_features',context);
+		res.status(200).render('class_features',{});
 });
 
 app.use(function(req,res){
