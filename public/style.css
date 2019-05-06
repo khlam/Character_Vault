@@ -55,6 +55,10 @@ body {
     grid-template-columns: repeat(12, 1fr);
 }
 
+.class-menu > div {
+    grid-template-columns: 1fr 4fr;
+}
+
 .table-header {
     background-image: url("ebony.jpg") !important;
     background-repeat: repeat;
