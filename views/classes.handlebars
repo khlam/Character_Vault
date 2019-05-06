@@ -1,0 +1,13 @@
+<div class="frame">
+    <h2>Class List</h2>
+    <div class="class-menu grid">
+        <div class="table-header menu-item">
+            <span>Character_id</span>
+            <span>Description</span>
+        </div>
+        {{#each Data}}
+        {{>class_list_item}}
+        {{/each}}
+    </div>
+    <button type="button">Add New Class</button> 
+</div>

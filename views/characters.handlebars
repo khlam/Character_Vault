@@ -1,24 +1,23 @@
 <div class="frame">
-    <div class="container">
-        <h2>Character List</h2>
-        <div class="character-menu grid">
-            <div class="table-header">
-                <span>Id</span>
-                <span>Race_id</span>
-                <span>Name</span>
-                <span>Gender</span>
-                <span>Alignment</span>
-                <span>HP</span>
-                <span>Str</span>
-                <span>Dex</span>
-                <span>Con</span>
-                <span>Int</span>
-                <span>Wis</span>
-                <span>Cha</span>
-            </div>
-            {{#each characterData}}
-            {{>character_list_item}}
-            {{/each}}
+    <h2>Character List</h2>
+    <div class="character-menu grid">
+        <div class="table-header menu-item">
+            <span>Id</span>
+            <span>Race_id</span>
+            <span>Name</span>
+            <span>Gender</span>
+            <span>Alignment</span>
+            <span>HP</span>
+            <span>Str</span>
+            <span>Dex</span>
+            <span>Con</span>
+            <span>Int</span>
+            <span>Wis</span>
+            <span>Cha</span>
         </div>
+        {{#each characterData}}
+        {{>character_list_item}}
+        {{/each}}
     </div>
+    <button type="button">Add New Character</button> 
 </div>
