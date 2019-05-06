@@ -31,6 +31,12 @@ body {
     border: 3px solid black;
     border-radius: 25px;
     overflow: hidden;
+    margin: 1em;
+}
+
+.grid {
+    display:grid;
+    grid-template-columns: minmax(50px, 250px);
 }
 
 /* ====================
@@ -45,10 +51,6 @@ body {
    Stat Block Style
    ================ */
 .statblock{
-    /* grid-column-gap: 1em; */
-    /* grid-row-gap: 1em; */
-    display:grid;
-    grid-template-columns: minmax(50px, 150px);
 }
 
 .statblock > div{
@@ -67,4 +69,19 @@ body {
 
 .stat > span:first-child {
     font-weight:bold;
+}
+
+/* ================
+   menu item style
+   ================ */
+.home-menu{
+}
+
+.home-menu > div{
+    background:#eee;
+    padding: 1em
+}
+
+.home-menu > div:nth-child(odd){
+    background:#ddd;
 }
