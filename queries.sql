@@ -12,3 +12,15 @@ SELECT class.name, feature.name, level, feature.description FROM class INNER JOI
 
 -- get all character's skills
 SELECT characters.name, skill.name, skill.description FROM characters INNER JOIN character_skill ON character_skill.character_id = characters.id INNER JOIN skill ON character_skill.skill_id = skill.name;
+
+-- Insert a new character
+INSERT INTO characters (name, race_id, gender, alignment, armor_class, initiative, speed, healthpoints, inspiration, strength, dexterity, constitution, intelligence, wisdom, charisma) VALUES (:nameInput, :race_selection_dropdown, :gender_dropdown, :alignment_dropdown, :armor_class_dropdown, :initiative_input, :speed_input, :healthpoints_input, :inspiration_input, :strength_input, :dexterity_input, :constitution_input, :intelligence_input, :wisdom_input, :charisma_input)
+
+-- Associate a character with multiple classes (m-to-m relationship)
+INSERT INTO character_class (character_id, class_id, level) VALUES (:character_id_selection_dropdown, :class_id_selection_dropdown, :level_input)
+
+-- Associate a character with multiple skills (m-to-m relationship)
+INSERT INTO character_skill (character_id, skill_id) VALUES (:character_id_selection_dropdown, :skill_name_selection_dropdown)
+
+-- Delete a character
+DELETE FROM characters WHERE id = :character_id_selection
