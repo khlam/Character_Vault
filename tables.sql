@@ -27,7 +27,7 @@ CREATE TABLE `characters` (
   `name` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
   `gender` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
   `alignment` varchar(255) DEFAULT '', -- TODO: change schema to reflect diffrence
-  `armor-class` int (255) DEFAULT '10',
+  `armor_class` int (255) DEFAULT '10',
   `initiative` int(255) DEFAULT '0',
   `speed` int(255) DEFAULT '30',
   `healthpoints` int(11) DEFAULT '0',
