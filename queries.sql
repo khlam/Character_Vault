@@ -21,3 +21,6 @@ INSERT INTO character_class (character_id, class_id, level) VALUES (:character_i
 
 -- Associate a character with multiple skills (m-to-m relationship)
 INSERT INTO character_skill (character_id, skill_id) VALUES (:character_id_selection_dropdown, :skill_name_selection_dropdown)
+
+-- Delete a character
+DELETE FROM characters WHERE id = :character_id_selection
