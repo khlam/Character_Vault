@@ -1,18 +1,13 @@
--- has to be droped prior to class and character
-DROP TABLE IF EXISTS `character_class`;
--- has to be droped prior to class and feature
-DROP TABLE IF EXISTS `class_feature`;
--- has to be droped prior to characters and skill
-DROP TABLE IF EXISTS `character_skill`;
-DROP TABLE IF EXISTS `class`;
+DROP TABLE IF EXISTS `character_skill`; -- has to be droped prior to characters and skill
+DROP TABLE IF EXISTS `character_class`; -- has to be droped prior to class and character
 DROP TABLE IF EXISTS `characters`;
-DROP TABLE IF EXISTS `feature`;
+DROP TABLE IF EXISTS `class`;
 DROP TABLE IF EXISTS `skill`;
 DROP TABLE IF EXISTS `race`;
 
 CREATE TABLE `race` (
-  `name` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
-  `description` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`name`)
   );
 
@@ -23,15 +18,11 @@ UNLOCK TABLES;
 
 CREATE TABLE `characters` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
-  `race_id` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
-  `name` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
-  `gender` varchar(255) NOT NULL, -- TODO: change schema to reflect diffrence
-  `alignment` varchar(255) DEFAULT '', -- TODO: change schema to reflect diffrence
-  `armor_class` int (255) DEFAULT '10',
-  `initiative` int(255) DEFAULT '0',
-  `speed` int(255) DEFAULT '30',
+  `race_id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `alignment` varchar(255) DEFAULT '',
   `healthpoints` int(11) DEFAULT '0',
-  `inspiration` boolean DEFAULT false,
   `strength` int(55) DEFAULT '10',
   `dexterity` int(55) DEFAULT '10',
   `constitution` int(55) DEFAULT '10',
@@ -43,8 +34,8 @@ CREATE TABLE `characters` (
 );
 
 LOCK TABLES `characters` WRITE;
-INSERT INTO `characters` VALUES (NULL, 'Human', 'High-Prophet Chad, the Rust Developer', 'Alpha Male', 'Chaotic Good', 16, 1, DEFAULT, 12, DEFAULT, 15, 12, 14, 8, DEFAULT, 15);
-INSERT INTO `characters` VALUES (NULL, 'Dwarf', 'Looser Paul, the Virgin C++ Coder', 'Beta-Cuck', 'No One Cares', NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+INSERT INTO `characters` VALUES (NULL, 'Human', 'High-Prophet Chad, the Rust Developer', 'Alpha Male', 'Chaotic Good', 12, 15, 12, 14, 8, DEFAULT, 15);
+INSERT INTO `characters` VALUES (NULL, 'Dwarf', 'Looser Paul, the Virgin C++ Coder', 'Beta-Cuck', 'No One Cares', 1, 1, 1, 1, 1, 1, 1);
 UNLOCK TABLES;
 
 CREATE TABLE `class` (
@@ -58,19 +49,6 @@ LOCK TABLES `class` WRITE;
 INSERT INTO `class` VALUES ('Holy Paladin', 'd10', '');
 INSERT INTO `class` VALUES ('Noble', 'd8', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
 INSERT INTO `class` VALUES ('Peasant', 'd4', '');
-UNLOCK TABLES;
-
-CREATE TABLE `feature` (
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `level` int(20) NOT NULL,
-  PRIMARY KEY (`name`)
-);
-
-LOCK TABLES `feature` WRITE;
-INSERT INTO `feature` VALUES ('Lay on Hands', 'Heal the person touched for 1d6 hitpoints per caster level.', 1);
-INSERT INTO `feature` VALUES ('Nose Up', 'Makes everyone in the room feel inferior.', 1);
-INSERT INTO `feature` VALUES ('Revolt','Cut the head off the reigning monarch.', 2);
 UNLOCK TABLES;
 
 CREATE TABLE `skill` (
@@ -97,20 +75,6 @@ LOCK TABLES `character_class` WRITE;
 INSERT INTO `character_class` VALUES ('1', 'Noble', DEFAULT);
 INSERT INTO `character_class` VALUES ('1', 'Holy Paladin', 2);
 INSERT INTO `character_class` VALUES ('2', 'Peasant', DEFAULT);
-UNLOCK TABLES;
-
-CREATE TABLE `class_feature` (
-  `class_id` varchar(255) NOT NULL,
-  `feature_id` varchar(255) NOT NULL,
-  PRIMARY KEY (`class_id`, `feature_id`),
-  CONSTRAINT `class_feature-1` FOREIGN KEY (`class_id`) REFERENCES `class` (`name`) ON DELETE CASCADE,
-  CONSTRAINT `class_feature-2` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`name`) ON DELETE CASCADE
-);
-
-LOCK TABLES `class_feature` WRITE;
-INSERT INTO `class_feature` VALUES ('Holy Paladin', 'Lay on Hands');
-INSERT INTO `class_feature` VALUES ('Noble', 'Nose Up');
-INSERT INTO `class_feature` VALUES ('Peasant', 'Revolt');
 UNLOCK TABLES;
 
 CREATE TABLE `character_skill` (
