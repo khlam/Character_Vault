@@ -1,0 +1,13 @@
+<div class="frame">
+    <h2>Skill List</h2>
+    <div class="skill-menu grid">
+        <div class="table-header menu-item">
+            <span>Name</span>
+            <span>Description</span>
+        </div>
+        {{#each skillData}}
+        {{>skill_list_item}}
+        {{/each}}
+    </div>
+    <button type="button">Add New Skill</button> 
+</div>

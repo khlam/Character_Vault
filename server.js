@@ -1,15 +1,9 @@
 let express = require('express');
 let os = require('os');
+let testData = require('./testData.js');
 
 let app = express();
 let handlebars = require('express-handlebars').create({defaultLayout:'main'});
-let host = os.hostname();
-
-// for testing only, will be replced by data from queries
-let characterData = [
-    {name: 'Ruth'},
-    {name: 'Jim'}
-];
 
 // Used to set a directory to display any static assets like
 // style sheets and images. In this case the public dir.
@@ -26,36 +20,38 @@ app.get('/',function(req,res,next){
 
 app.get('/characters',function(req,res,next){
 		res.status(200).render('characters',{
-        characterData: characterData
+        characterData: testData.characterData
     });
 });
 
 app.get('/classes',function(req,res,next){
-		res.status(200).render('classes',{});
+		res.status(200).render('classes',{
+        classData: testData.classData
+    });
 });
 
 app.get('/races',function(req,res,next){
-		res.status(200).render('races',{});
-});
-
-app.get('/features',function(req,res,next){
-		res.status(200).render('features',{});
+		res.status(200).render('races',{
+        raceData: testData.raceData
+    });
 });
 
 app.get('/skills',function(req,res,next){
-		res.status(200).render('skills',{});
+		res.status(200).render('skills',{
+        skillData: testData.skillData
+    });
 });
 
 app.get('/character_classes',function(req,res,next){
-		res.status(200).render('character_classes',{});
+		res.status(200).render('character_classes',{
+        characterClassData: testData.characterClassData
+    });
 });
 
 app.get('/character_skills',function(req,res,next){
-		res.status(200).render('character_skills',{});
-});
-
-app.get('/class_features',function(req,res,next){
-		res.status(200).render('class_features',{});
+		res.status(200).render('character_skills',{
+        characterSkillData: testData.characterSkillData
+    });
 });
 
 app.use(function(req,res){
