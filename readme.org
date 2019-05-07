@@ -1,2 +1,17 @@
-* Domain: access.engr.oregonstate.edu/~{onid}/{port}
-* Port: 
+* Domain: access.engr.oregonstate.edu:{port}
+  
+* Starting the server
+  1. Download the repo
+     #+BEGIN_SRC bash
+       git clone git@github.com:zermish/Character_Vault.git
+     #+END_SRC
+  2. cd to the project directory and install dependencies
+     #+BEGIN_SRC bash
+       cd Character_Vault
+       npm install
+     #+END_SRC
+  3. Run the server with local forever module
+     #+BEGIN_SRC bash
+       ./node_modules/forever/bin/forever start diagnostic.js {port number goes here}
+     #+END_SRC
+   
