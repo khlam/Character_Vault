@@ -39,6 +39,7 @@ body {
 
 .grid > div{
     background:#eee;
+    grid-template-columns: 1fr 4fr;
 }
 
 .grid > div:nth-child(odd){
@@ -55,8 +56,12 @@ body {
     grid-template-columns: repeat(12, 1fr);
 }
 
+.character-class-menu > div {
+    grid-template-columns: 1fr 1fr 3fr;
+}
+
 .class-menu > div {
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 1fr 3fr;
 }
 
 .table-header {
