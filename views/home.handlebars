@@ -1,24 +1,11 @@
 <div class="frame">
     <div class="container">
         <div class="home-menu grid">
+            {{#each paths}}
             <div class="menu-item">
-                <a href="/characters">Characters</a>
+                <a href="{{path}}">{{title}}</a>
             </div>
-            <div class="menu-item">
-                <a href="/classes">Classes</a>
-            </div>
-            <div class="menu-item">
-                <a href="races">Races</a>
-            </div>
-            <div class="menu-item">
-                <a href="skills">Skills</a>
-            </div>
-            <div class="menu-item">
-                <a href="character_classes">Character Classes</a>
-            </div>
-            <div class="menu-item">
-                <a href="character_skills">Character Skills</a>
-            </div>
+            {{/each}}
         </div>
     </div>
 </div>
