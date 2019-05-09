@@ -1,0 +1,26 @@
+[
+    {
+        "path":"characters",
+        "title":"Characters Table"
+    },
+    {
+        "path":"classes",
+        "title":"Classes Table"
+    },
+    {
+        "path":"races",
+        "title":"Races Table"
+    },
+    {
+        "path":"skills",
+        "title":"Skills Table"
+    },
+    {
+        "path":"character_classes",
+        "title":"Character Classes Table"
+    },
+    {
+        "path":"character_skills",
+        "title":"Character Skills Table"
+    }
+]

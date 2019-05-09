@@ -1,58 +1,17 @@
 let express = require('express');
-let os = require('os');
-let testData = require('./testData.js');
+let handlebars = require('express-handlebars').create({defaultLayout:'main'});
+let index = require('./routes/index.js');
 
 let app = express();
-let handlebars = require('express-handlebars').create({defaultLayout:'main'});
+let port = process.argv[2] || 5454;
+let testData = require('./testData.js');
 
-// Used to set a directory to display any static assets like
-// style sheets and images. In this case the public dir.
 app.use(express.static('public'));
-// Sets view engine
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-// Sets port as a command line argument
-app.set('port', process.argv[2]);
+app.set('port', port);
 
-app.get('/',function(req,res,next){
-		res.status(200).render('home',{});
-});
-
-app.get('/characters',function(req,res,next){
-		res.status(200).render('characters',{
-        characterData: testData.characterData
-    });
-});
-
-app.get('/classes',function(req,res,next){
-		res.status(200).render('classes',{
-        classData: testData.classData
-    });
-});
-
-app.get('/races',function(req,res,next){
-		res.status(200).render('races',{
-        raceData: testData.raceData
-    });
-});
-
-app.get('/skills',function(req,res,next){
-		res.status(200).render('skills',{
-        skillData: testData.skillData
-    });
-});
-
-app.get('/character_classes',function(req,res,next){
-		res.status(200).render('character_classes',{
-        characterClassData: testData.characterClassData
-    });
-});
-
-app.get('/character_skills',function(req,res,next){
-		res.status(200).render('character_skills',{
-        characterSkillData: testData.characterSkillData
-    });
-});
+app.use('/', index); // mount the index router
 
 app.use(function(req,res){
   res.status(404);

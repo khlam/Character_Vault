@@ -1,5 +1,5 @@
 module.exports = {
-    characterData:[
+    characters:[
         {
             id: 1,
             race_id: 'Human',
@@ -29,7 +29,7 @@ module.exports = {
             charisma: 9
         }
     ],
-    raceData:[
+    races:[
         {
             name: 'Human',
             description: 'Your average joe Shmoe.'
@@ -39,7 +39,7 @@ module.exports = {
             description: 'Short and squate, just dont mess with the beard!!!'
         }
     ],
-    classData:[
+    classes:[
         {
             name: 'Paladin',
             hit_dice: 'd10',
@@ -56,7 +56,7 @@ module.exports = {
             description: 'All around warrior, trained in the art of combat.'
         }
     ],
-    skillData:[
+    skills:[
         {
             name: 'Stealth',
             description: 'You ability to hide from others.'
@@ -70,7 +70,7 @@ module.exports = {
             description: 'Your ability to learn and identify new spells.'
         }
     ],
-    characterClassData:[
+    character_classes:[
         {
             character_id: 1,
             class_id: 'Fighter',
@@ -87,7 +87,7 @@ module.exports = {
             level: 2
         }
     ],
-    characterSkillData:[
+    character_skills:[
         {
             character_id: 1,
             skill_id: 'Athletics'
