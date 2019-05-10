@@ -4,15 +4,19 @@ const testData = require('../testData');
 
 router.get('/', (req, res, next) => {
     res.status(200).render('home',{
-        paths: paths
+        data: paths
     });
 });
 
 router.get('/:path', (req, res, next) => {
     let path = req.params.path;
-    if(paths.find(elem => elem['path'] == path)){
-        res.status(200).render(`${path}`, {
-            context: testData[`${path}`]
+    if(paths[path]){
+        res.status(200).render('table_page', {
+            // Path specific parameters such as page title
+            params: paths[path],
+            // Path specific data: will be replaced by database
+            // queries in the future
+            data: testData[`${path}`]
         });
     } else {
         next();

@@ -1,9 +1,9 @@
 <div class="frame">
     <div class="container">
         <div class="home-menu grid">
-            {{#each paths}}
+            {{#each data}}
             <div class="menu-item">
-                <a href="{{path}}">{{title}}</a>
+                <a href="{{@key}}">{{title}}</a>
             </div>
             {{/each}}
         </div>

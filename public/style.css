@@ -39,7 +39,6 @@ body {
 
 .grid > div{
     background:#eee;
-    grid-template-columns: 1fr 4fr;
 }
 
 .grid > div:nth-child(odd){
@@ -52,16 +51,19 @@ body {
     padding: 10px;
 }
 
-.character-menu > div {
+/* 12 column grid */
+.col12 {
     grid-template-columns: repeat(12, 1fr);
 }
 
-.character-class-menu > div {
+/* 3 column grid */
+.col3 {
     grid-template-columns: 1fr 1fr 3fr;
 }
 
-.class-menu > div {
-    grid-template-columns: 1fr 1fr 3fr;
+/* 2 column grid */
+.col2 {
+    grid-template-columns: 1fr 4fr;
 }
 
 .home-menu {

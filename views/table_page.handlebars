@@ -1,0 +1,14 @@
+<div class="frame">
+    <h2>{{params.title}}</h2>
+    <div class="table-menu grid">
+        <div class="table-header menu-item col{{params.table_columns}}">
+            {{#each data.[0]}}
+            <span>{{@key}}</span>
+            {{/each}}
+        </div>
+        {{#each data}}
+        {{>list_item}}
+        {{/each}}
+    </div>
+    <button type="button">Add New Item</button> 
+</div>

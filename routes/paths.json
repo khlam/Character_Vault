@@ -1,26 +1,27 @@
-[
-    {
-        "path":"characters",
-        "title":"Characters Table"
+{
+    "characters":{
+        "title":"Characters Table",
+        "table_columns": 12
     },
-    {
-        "path":"classes",
-        "title":"Classes Table"
+    "classes":{
+        "title":"Classes Table",
+        "table_columns":3
     },
-    {
-        "path":"races",
-        "title":"Races Table"
+    "races":{
+        "title":"Races Table",
+        "table_columns":2
     },
-    {
-        "path":"skills",
-        "title":"Skills Table"
+    "skills":{
+        "title":"Skills Table",
+        "table_columns":2
     },
-    {
-        "path":"character_classes",
-        "title":"Character Classes Table"
+    "character_classes":{
+        "title":"Character Classes Table",
+        "table_columns":3
     },
-    {
-        "path":"character_skills",
-        "title":"Character Skills Table"
+    "character_skills":{
+        "title":"Character Skills Table",
+        "table_columns":2
     }
-]
+}
+
