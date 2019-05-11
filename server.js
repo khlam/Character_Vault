@@ -4,13 +4,13 @@ let index = require('./routes/index.js');
 
 let app = express();
 let port = process.argv[2] || 5454;
-let testData = require('./testData.js');
 
 app.use(express.static('public'));
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', port);
 
+// mounts a router that handles site paths
 app.use('/', index); // mount the index router
 
 app.use(function(req,res){

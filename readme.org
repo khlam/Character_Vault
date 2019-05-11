@@ -15,3 +15,40 @@
        ./node_modules/forever/bin/forever start diagnostic.js {port number goes here}
      #+END_SRC
    
+* Adding a new page 
+  1. Create a {page name}.handlebars template in the views directory following handlebars conventions.
+  
+     *Example Handlebars Template:*
+     #+BEGIN_SRC html
+       <!-- params is a js object pased into a GET request response -->
+       <!-- title is a key in the object -->
+       <!-- {{}} is used to evaluate expressions and return thier resuts as html -->
+       <h2>{{params.title}}</h2>
+       <div>
+           <p>This is some normal html</p>
+           <!-- For each element in data, where data is a js object or array -->
+           {{#each data}}
+           <!-- create a span and evaluat the current element of data -->
+           <span>{{this}}</span>
+           {{/each}}
+       </div>
+     #+END_SRC
+  2. Add the page to the page_config.json file in the routes folder.
+     The page_config file is used to set which paths are valid and special parameters those paths are expecting.
+
+     In order to add a page to the file, create a new json object at the end of the list whos key matched the pages name exactly.
+
+     *For example:* if you made the page foo.handlebars the key should be "foo":{}.
+
+     Once added to the page_config file, the page will then be accessible from the path "/{page name}.
+
+     Inside the page object, parameters can be set that will be specific to the page, like:
+
+     #+BEGIN_SRC json
+          "foo":{
+              "title":"The Foobar page!",
+              "id":23
+          }
+     #+END_SRC
+     
+  3. Note: All pages, other then the home page, will be passed 2 objects and an array automatically: paths (array of path names), params (object containing your specific page parameters defined earlier), and data (an object containing data to be displayed)
