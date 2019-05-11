@@ -2,5 +2,11 @@
     <div class="header-logo-container">
         <a href="/"><img src="/dnd_logo.png" alt="D&D Logo"></a>
     </div>
-    <h1 class="site-title"><a href="/">Character Vault</a></h1>
+    <h1><a href="/">character vault</a></h1>
 </header>
+{{#if params.title}}
+<h2>{{params.title}}</h2>
+{{else}}
+<h2>Home</h2>
+{{/if}}
+
