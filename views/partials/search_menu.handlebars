@@ -1,0 +1,25 @@
+<div class="search-menu">
+    <input id="searchbox" type="text" placeholder="Search" onkeyup="search()" value="">
+    <script>
+        function search() {
+            let input = document.getElementById("searchbox").value.toUpperCase()
+            table = document.getElementsByName('content');
+            console.log(table)
+            if (input != "") {
+                for (i = 0; i < table.length; i++) {
+                    let row = table[i].textContent || table[i].innerText
+                    console.log(row.toUpperCase().indexOf(input))
+                    if (row.toUpperCase().indexOf(input) > -1) {
+                        table[i].style.display = ""
+                    }else {
+                        table[i].style.display = "none"
+                    }
+                }
+            }else {
+                for (i = 1; i < table.length; i++) {
+                    table[i].style.display = ""
+                }
+            }
+        }
+    </script>
+</div>
