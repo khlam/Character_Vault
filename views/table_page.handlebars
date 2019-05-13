@@ -7,6 +7,9 @@
                 {{#each data.[0]}}
                 <span>{{@key}}</span>
                 {{/each}}
+                {{#ifequ params.title "Characters Table"}}
+                    <span></span>
+                {{/ifequ}}
             </div>
             {{#each data}}
             {{>list_item}}

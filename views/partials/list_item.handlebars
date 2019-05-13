@@ -3,4 +3,8 @@
     {{#each this}}
     <span>{{this}}</span>
     {{/each}}
+    {{#ifequ @root.params.title "Characters Table"}}
+        <span><button type="button">Edit</button></span>
+        <span><button type="button">Delete</button></span>
+    {{/ifequ}}
 </div>
