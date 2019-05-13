@@ -46,9 +46,9 @@ CREATE TABLE `class` (
 );
 
 LOCK TABLES `class` WRITE;
-INSERT INTO `class` VALUES ('Holy Paladin', 'd10', '');
+INSERT INTO `class` VALUES ('Holy Paladin', 'd10', 'Religious fanatics blessed by the light of good database design.');
 INSERT INTO `class` VALUES ('Noble', 'd8', 'Superior beings who commands subordinates to manage their resources for them. Flawless and dynamic. Never falters. Hearlds of the future, beloved by all.');
-INSERT INTO `class` VALUES ('Peasant', 'd4', '');
+INSERT INTO `class` VALUES ('Peasant', 'd4', 'A lowly pesants, bottom-of-the barrel type.');
 UNLOCK TABLES;
 
 CREATE TABLE `skill` (
