@@ -13,12 +13,12 @@ const hbs = handlebars.create({
       return options.inverse(this);
     }
   }
-})
+});
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.engine('handlebars', handlebars.engine);
+app.engine('handlebars', hbs.engine);
 
 app.set('view engine', 'handlebars');
 app.set('port', port);
