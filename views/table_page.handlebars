@@ -1,11 +1,15 @@
 <div class="frame">
     {{>nav_menu}}
+    {{>search_menu}}
     <div class="container">
         <div class="table-menu grid">
             <div class="table-header menu-item col{{params.table_columns}}">
                 {{#each data.[0]}}
                 <span>{{@key}}</span>
                 {{/each}}
+                {{#ifequ params.title "Characters Table"}}
+                    <span></span>
+                {{/ifequ}}
             </div>
             {{#each data}}
             {{>list_item}}
