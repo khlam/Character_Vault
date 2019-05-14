@@ -138,3 +138,17 @@ button::-moz-focus-inner {
     border: 0;
 }
 
+form {
+    max-width: 50%;
+}
+
+fieldset > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+span {
+    font-weight: bold;
+}
