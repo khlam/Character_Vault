@@ -1,6 +1,7 @@
 let express = require('express');
 let handlebars = require('express-handlebars');
 let index = require('./routes/index.js');
+let bodyParser = require('body-parser');
 
 let app = express();
 let port = process.argv[2] || 5454;
@@ -15,7 +16,10 @@ const hbs = handlebars.create({
 })
 
 app.use(express.static('public'));
-app.engine('handlebars', hbs.engine);
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.engine('handlebars', handlebars.engine);
+
 app.set('view engine', 'handlebars');
 app.set('port', port);
 

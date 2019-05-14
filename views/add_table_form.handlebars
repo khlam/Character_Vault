@@ -1,0 +1,13 @@
+<form action="/add-row" method="post">
+    <input type="hidden" name="destination" value="{{HTTP_REFERER}}"/>
+    <fieldset>
+        <legend>Item Information:</legend>
+        {{#each fields}}
+        <div>
+            <span>{{this}}</span>
+            <input name="{{this}}" type="text" value=""/>
+        </div>
+        {{/each}}
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
