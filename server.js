@@ -1,15 +1,25 @@
 let express = require('express');
-let handlebars = require('express-handlebars').create({defaultLayout:'main'});
+let handlebars = require('express-handlebars');
 let index = require('./routes/index.js');
 let bodyParser = require('body-parser');
 
 let app = express();
 let port = process.argv[2] || 5454;
+const hbs = handlebars.create({
+  defaultLayout:'main',
+  helpers: {
+    ifequ: function (a, b, options) {
+      if (a == b) { return options.fn(this); }
+      return options.inverse(this);
+    }
+  }
+})
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.engine('handlebars', handlebars.engine);
+
 app.set('view engine', 'handlebars');
 app.set('port', port);
 
