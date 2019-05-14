@@ -6,14 +6,36 @@ header {
     grid-template-columns: auto auto;
     justify-items: start;
     grid-template-columns: 1fr 8fr;
-    margin-bottom: 1em;
     padding: 1em;
-    background-color: #d7d7d7;
-    background-image: linear-gradient(
-        147deg, #d7d7d7 0%, #353535 74%);
+    background-color: #5b3d2b;
+    background-image: url("./leather.png");
 }
 
-img {
+h1 {
+    color: #333;
+    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
+}
+
+h2 {
+    background-color: black;
+    color: #f2f9f9;
+    margin: 0px;
+    padding: 5px 1em 5px 1em;
+}
+
+a { text-decoration: none; }
+a::first-letter{text-transform: uppercase;}
+a:visited { text-decoration: none; color: black;}
+a:hover { text-decoration: none; color: black; }
+a:focus { text-decoration: none; color: black; }
+h1 > a {text-transform: uppercase;}
+.menu-item > a:hover {background-color: black; color:white;}
+
+.menu-item > a {
+    padding:10px;
+}
+
+a > img {
     display: block;
     max-height:100px;
     width: auto;
@@ -39,7 +61,6 @@ body {
 
 .grid > div{
     background:#eee;
-    grid-template-columns: 1fr 4fr;
 }
 
 .grid > div:nth-child(odd){
@@ -52,25 +73,42 @@ body {
     padding: 10px;
 }
 
-.character-menu > div {
+/* 12 column grid */
+.col12 {
     grid-template-columns: repeat(12, 1fr);
 }
 
-.character-class-menu > div {
+/* 3 column grid */
+.col3 {
     grid-template-columns: 1fr 1fr 3fr;
 }
 
-.class-menu > div {
-    grid-template-columns: 1fr 1fr 3fr;
+/* 2 column grid */
+.col2 {
+    grid-template-columns: 1fr 4fr;
 }
 
-.home-menu {
-    max-width: 300px;
-    grid-template-columns: 1fr;
+.nav-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 75%;
+    padding-bottom: 1em;
+    font-weight: bold;
+    font-size: large;
 }
 
-.home-menu > div{
+.nav-menu > div{
     grid-template-columns: 1fr;
+    padding:0px;
+}
+
+.search-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 75%;
+    padding-bottom: 1em;
+    font-weight: bold;
+    font-size: large;
 }
 
 .table-header {
@@ -80,20 +118,20 @@ body {
 
 .table-header > span {
     font-weight: bold;
-    color: #c0c0c0;
+    color: #f2f9f9;
 }
 
 button {
     margin: 1em;
     font-weight: bold;
-    background-image: url("granit.png") !important;
+    background-image: url("./rocky-wall.png") !important;
+    color:#494a49 !important;
     background-repeat: repeat;
     border-radius: 25px;
     overflow: hidden;
     padding: 3px 5px 3px 5px;
-    color: #333;
-    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
     font-size: 1em;
+    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
 }
 
 button::-moz-focus-inner {

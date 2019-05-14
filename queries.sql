@@ -19,5 +19,17 @@ INSERT INTO character_class (character_id, class_id, level) VALUES (:character_i
 -- Associate a character with multiple skills (m-to-m relationship)
 INSERT INTO character_skill (character_id, skill_id) VALUES (:character_id_selection_dropdown, :skill_name_selection_dropdown)
 
--- Delete a character
+-- Insert a new Skill
+INSERT INTO skill (name, description) VALUES (:skill_name_text_input, :description_text_input)
+
+-- Insert a new Race
+INSERT INTO race (name, description) VALUES (:race_name_text_input, :description_text_input)
+
+-- Insert a new Class
+INSERT INTO class (name, hit_dice, description) VALUES (:class_name_text_input, :hit_dice_dropdown, :description_text_input)
+
+-- Delete a Character
 DELETE FROM characters WHERE id = :character_id_selection
+
+-- Update a character's information
+UPDATE characters SET name = :nameInput, race_id = :race_selection_dropdown, gender = :gender_dropdown, alignment = :alignment_dropdown, healthpoints = :healthpoints_input, strength = :strength_input, dexterity = :dexterity_input, constitution = :constitution_input, intelligence = :intelligence_input,  wisdom = :wisdom_input, charisma = :charisma_input WHERE name = :nameInput;

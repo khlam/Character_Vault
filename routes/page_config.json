@@ -1,0 +1,27 @@
+{
+    "characters":{
+        "title":"Characters Table",
+        "table_columns": 12
+    },
+    "classes":{
+        "title":"Classes Table",
+        "table_columns":3
+    },
+    "races":{
+        "title":"Races Table",
+        "table_columns":2
+    },
+    "skills":{
+        "title":"Skills Table",
+        "table_columns":2
+    },
+    "character_classes":{
+        "title":"Character Classes Table",
+        "table_columns":3
+    },
+    "character_skills":{
+        "title":"Character Skills Table",
+        "table_columns":2
+    }
+}
+
