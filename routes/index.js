@@ -29,8 +29,17 @@ router.get('/add-form/:HTTP_REFERER', (req, res, next) => {
 });
 
 router.post('/add-row', (req, res, next) => {
-    let destination = req.body.destination;
-    res.redirect(`/${destination}`);
+    let table = req.body.destination;
+    let data = req.body;
+    delete data.destination;
+    let columns = Object.keys(data).join(',');
+    let values = Object.values(data).map(value => `'${value}'`).join(',');
+    let db = req.app.get('db');
+    let queryStr = `INSERT INTO ${table} (${columns}) VALUES (${values})`;
+    db.connect(queryStr, (data) => {
+        console.log(data);
+    });
+    res.redirect(`/${table}`);
 });
 
 router.get('/search/:db_Name/:query', (req, res, next) => {
