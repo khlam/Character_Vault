@@ -16,27 +16,16 @@ router.get('/add-form/:HTTP_REFERER', (req, res, next) => {
     let HTTP_REFERER = req.params.HTTP_REFERER;
     let db = req.app.get('db');
     let queryStr = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${HTTP_REFERER}'`;
-    db.pool.getConnection()
-        .then (conn => {
-            conn.query(queryStr)
-                .then( data =>{
-                    res.status(200).render('add_table_form', {
-                        // path to page who referenced the form
-                        HTTP_REFERER: HTTP_REFERER,
-                        params: {
-                            title: `Add ${HTTP_REFERER} Item`
-                        },
-                        fields: data
-                    });
-                    conn.end();
-                })
-                .catch (e => {
-                    console.error('Query error:', e.message, e.stack);
-                    conn.end();
-                });
-        }).catch(e => {
-            console.error('Connection error:', e.message, e.stack);
+    db.connect(queryStr, (data) => {
+        res.status(200).render('add_table_form', {
+            // path to page who referenced the form
+            HTTP_REFERER: HTTP_REFERER,
+            params: {
+                title: `Add ${HTTP_REFERER} Item`
+            },
+            fields: data
         });
+    });
 });
 
 router.post('/add-row', (req, res, next) => {
@@ -85,7 +74,7 @@ router.get('/:page', (req, res, next) => {
     let db = req.app.get('db');
     let queryStr = `SELECT * FROM ${page}`;
     if(params) {
-        db.connecting(queryStr, (data) => {
+        db.connect(queryStr, (data) => {
             res.status(200).render('table_page', {
                 url: page, // reference to current page
                 paths: paths, // List of accepted paths
