@@ -8,4 +8,16 @@ const pool = db.createPool({
     connectionLimit: 10
 });
 
-module.exports.pool = pool;
+connect = async (sql, callback) => {
+    let conn;
+    try {
+	      conn = await pool.getConnection();
+	      callback(await conn.query(sql));
+    } catch (err) {
+	      throw err;
+    } finally {
+	      if (conn) conn.end();
+    }
+};
+
+module.exports.connect = connect;
