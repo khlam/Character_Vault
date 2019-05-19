@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const page_config = require('./page_config');
-const testData = require('../testData');
 
 // List of available site path names
 const paths = Object.keys(page_config);
@@ -36,19 +35,28 @@ router.post('/add-row', (req, res, next) => {
 router.get('/:page', (req, res, next) => {
     let page = req.params.page;
     let params = page_config[page];
-    if(params){
-        res.status(200).render('table_page', {
-            // reference to current page
-            url: page,
-            // Pass in js objects to make them available
-            // to handlebars templates.
-            paths: paths,
-            // Path specific parameters such as page title
-            params: params,
-            // Path specific data: will be replaced by database
-            // queries in the future
-            data: testData[`${page}`]
-        });
+    let db = req.app.get('db');
+    let queryStr = `SELECT * FROM ${page}`;
+    if(params) {
+        db.pool.getConnection()
+            .then (conn => {
+                conn.query(queryStr)
+                    .then( data =>{
+                        res.status(200).render('table_page', {
+                            url: page, // reference to current page
+                            paths: paths, // List of accepted paths
+                            params: params, // Path specific parameters
+                            data: data // database query results
+                        });
+                        conn.end();
+                    })
+                    .catch (e => {
+                        console.error('Query error:', e.message, e.stack);
+                        conn.end();
+                    });
+            }).catch(e => {
+                console.error('Connection error:', e.message, e.stack);
+            });
     } else {
         next();
     }
