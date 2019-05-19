@@ -2,32 +2,32 @@
     "characters":{
         "title":"Characters Table",
         "table_columns": 12,
-        "search": "name"
+        "search": ["name", "race_id", "gender", "alignment"]
     },
     "class":{
         "title":"Classes Table",
         "table_columns":3,
-        "search": ""
+        "search": ["name", "hit_dice", "description"]
     },
     "race":{
         "title":"Races Table",
         "table_columns":2,
-        "search": ""
+        "search": ["name", "description"]
     },
     "skill":{
         "title":"Skills Table",
         "table_columns":2,
-        "search": ""
+        "search": ["name", "description"]
     },
     "character_class":{
         "title":"Character Classes Table",
         "table_columns":3,
-        "search": ""
+        "search": ["class_id"]
     },
     "character_skill":{
         "title":"Character Skills Table",
         "table_columns":2,
-        "search": ""
+        "search": ["skill_id"]
     }
 }
 
