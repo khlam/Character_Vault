@@ -73,7 +73,7 @@ router.get('/:page', (req, res, next) => {
     let db = req.app.get('db');
     let queryStr = `SELECT * FROM ${page}`;
     if(params) {
-        db.connecting(queryStr, (data) => {
+        db.connect(queryStr, (data) => {
             res.status(200).render('table_page', {
                 url: page, // reference to current page
                 paths: paths, // List of accepted paths
