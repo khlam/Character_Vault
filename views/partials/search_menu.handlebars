@@ -12,6 +12,7 @@
                     for (i = 0; i < table.length; i++) {
                         table[i].style.display = "none"
                     }
+                    delete_result()
                     for (i in out){
                         document.getElementById("display_table").appendChild(add_item(out[i]))
                     }
@@ -19,16 +20,26 @@
             })
 
             if (input == "") {
+                delete_result()
                 for (i = 0; i < table.length; i++) {
                     table[i].style.display = ""
                 }
+
+            }
+        }
+
+        function delete_result(){
+            var ele = document.getElementsByName("content result");
+            for(var i=ele.length-1;i>=0;i--)
+            {
+                ele[i].parentNode.removeChild(ele[i]);
             }
         }
 
         function add_item(obj) {
             let a = document.createElement("div")
-            a.setAttribute('name', 'content')
-            a.setAttribute('class', 'table-header menu-item {{@root.params.table_columns}}');
+            a.setAttribute('name', 'content result')
+            a.setAttribute('class', 'menu-item col{{@root.params.table_columns}}');
             for (i in obj) {
                 a.appendChild(document.createElement("span")).innerHTML = obj[i]
             }
