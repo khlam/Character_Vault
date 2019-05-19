@@ -85,25 +85,14 @@ router.get('/:page', (req, res, next) => {
     let db = req.app.get('db');
     let queryStr = `SELECT * FROM ${page}`;
     if(params) {
-        db.pool.getConnection()
-            .then (conn => {
-                conn.query(queryStr)
-                    .then( data =>{
-                        res.status(200).render('table_page', {
-                            url: page, // reference to current page
-                            paths: paths, // List of accepted paths
-                            params: params, // Path specific parameters
-                            data: data // database query results
-                        });
-                        conn.end();
-                    })
-                    .catch (e => {
-                        console.error('Query error:', e.message, e.stack);
-                        conn.end();
-                    });
-            }).catch(e => {
-                console.error('Connection error:', e.message, e.stack);
+        db.connecting(queryStr, (data) => {
+            res.status(200).render('table_page', {
+                url: page, // reference to current page
+                paths: paths, // List of accepted paths
+                params: params, // Path specific parameters
+                data: data // database query results
             });
+        });
     } else {
         next();
     }
