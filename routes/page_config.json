@@ -1,27 +1,33 @@
 {
     "characters":{
         "title":"Characters Table",
-        "table_columns": 12
+        "table_columns": 12,
+        "search": "name"
     },
     "class":{
         "title":"Classes Table",
-        "table_columns":3
+        "table_columns":3,
+        "search": ""
     },
     "race":{
         "title":"Races Table",
-        "table_columns":2
+        "table_columns":2,
+        "search": ""
     },
     "skill":{
         "title":"Skills Table",
-        "table_columns":2
+        "table_columns":2,
+        "search": ""
     },
     "character_class":{
         "title":"Character Classes Table",
-        "table_columns":3
+        "table_columns":3,
+        "search": ""
     },
     "character_skill":{
         "title":"Character Skills Table",
-        "table_columns":2
+        "table_columns":2,
+        "search": ""
     }
 }
 

@@ -32,6 +32,33 @@ router.post('/add-row', (req, res, next) => {
     res.redirect(`/${destination}`);
 });
 
+router.get('/search/:db_Name/:query', (req, res, next) => {
+    let dbName = req.params.db_Name
+    let query = req.params.query
+    let criteria = page_config[dbName].search
+
+    if (page_config[dbName]) {
+        let queryStr = `SELECT * FROM ${dbName} WHERE ${criteria} LIKE '%${query}%'`
+        let db = req.app.get('db');
+
+        db.pool.getConnection()
+        .then (conn => {
+            conn.query(queryStr)
+                .then( data =>{
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify(data))
+                    conn.end();
+                })
+                .catch (e => {
+                    console.error('Query error:', e.message, e.stack);
+                    conn.end();
+                });
+        }).catch(e => {
+            console.error('Connection error:', e.message, e.stack);
+        });
+    }
+})
+
 router.get('/:page', (req, res, next) => {
     let page = req.params.page;
     let params = page_config[page];
