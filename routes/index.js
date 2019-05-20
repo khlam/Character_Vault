@@ -58,21 +58,10 @@ router.get('/search/:db_Name/:query', (req, res, next) => {
     if (page_config[dbName]) {
         let queryStr = `SELECT * FROM ${dbName} WHERE ${searchCols}`;
         let db = req.app.get('db');
-        console.log(queryStr);
-        db.pool.getConnection()
-        .then (conn => {
-            conn.query(queryStr)
-                .then( data =>{
-                    res.setHeader('Content-Type', 'application/json');
-                    res.end(JSON.stringify(data));
-                    conn.end();
-                })
-                .catch (e => {
-                    console.error('Query error:', e.message, e.stack);
-                    conn.end();
-                });
-        }).catch(e => {
-            console.error('Connection error:', e.message, e.stack);
+        console.log(queryStr);	
+		db.connect(queryStr, (data) => {
+			res.setHeader('Content-Type', 'application/json');
+			res.end(JSON.stringify(data));
         });
     }
 });
