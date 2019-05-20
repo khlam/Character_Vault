@@ -8,16 +8,15 @@ const pool = db.createPool({
     connectionLimit: 10
 });
 
-connect = async (sql, callback) => {
-    let conn;
-    try {
-	      conn = await pool.getConnection();
-	      callback(await conn.query(sql));
-    } catch (err) {
-	      throw err;
-    } finally {
-	      if (conn) conn.end();
-    }
+connect = (sql, callback) => {
+	  pool.getConnection()
+        .then( conn =>{
+            conn.query(sql)
+                .then(data => callback(data))
+                .catch(e => console.error('Query Error: ', e.message, e.stack));
+            conn.end();
+        })
+        .catch(e => console.error('Connection Error: ', e.message, e.stack));
 };
 
 module.exports.connect = connect;
