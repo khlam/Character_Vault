@@ -1,5 +1,17 @@
 * Domain: access.engr.oregonstate.edu:{port}
   
+* Setting up credentials
+  1. Edit your shells .rc file (for example .bashcs or .zshrc) adding the following lines.
+     #+BEGIN_SRC bash
+       export DATABASE_NAME="name of database"
+       export DATABASE_USER="your database user name"
+       export DATABASE_PASSWORD="your database password"
+       export DATABASE_HOST="your databases host"
+     #+END_SRC
+  2. Source your shell rc file
+     #+BEGIN_SRC bash
+       source .bashrc #For example
+     #+END_SRC
 * Starting the server
   1. Download the repo
      #+BEGIN_SRC bash
