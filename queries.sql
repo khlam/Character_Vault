@@ -33,3 +33,9 @@ DELETE FROM characters WHERE id = :character_id_selection
 
 -- Update a character's information
 UPDATE characters SET name = :nameInput, race_id = :race_selection_dropdown, gender = :gender_dropdown, alignment = :alignment_dropdown, healthpoints = :healthpoints_input, strength = :strength_input, dexterity = :dexterity_input, constitution = :constitution_input, intelligence = :intelligence_input,  wisdom = :wisdom_input, charisma = :charisma_input WHERE name = :nameInput;
+
+-- Searching <table> for some <string>
+SELECT * FROM :dbName WHERE :searchCols LIKE :queryString
+
+-- Add-form
+SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :HTTP_REFERER AND COLUMN_NAME NOT LIKE :id;
