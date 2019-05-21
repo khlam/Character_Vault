@@ -18,27 +18,33 @@ router.get('/add-form/:HTTP_REFERER', (req, res, next) => {
     let db = req.app.get('db');
     let queryStr = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS `
         + `WHERE TABLE_NAME = '${HTTP_REFERER}' AND COLUMN_NAME NOT LIKE '%id';`;
-    page_config[HTTP_REFERER].fKeys.forEach(fKey => {
-        queryStr += `SELECT ${fKey.idColumn} AS value FROM ${fKey.table};`;
-    });
-    db.connect(queryStr, (data) => {
-        let temp = data;
-        let fields = temp.shift();
-        let fKeyValues = {};
-        let count = 0;
-        temp.forEach(arg => {
-            fKeyValues[fKeys[count].key] = [];
-            arg.forEach(obj => fKeyValues[fKeys[count].key].push(obj.value));
-            count += 1;
+    if('fKeys' in page_config[HTTP_REFERER]){
+        page_config[HTTP_REFERER].fKeys.forEach(fKey => {
+            queryStr += `SELECT ${fKey.idColumn} AS value FROM ${fKey.table};`;
         });
-        res.status(200).render('add_table_form', {
+    }
+    db.connect(queryStr, (data) => {
+        let context = {
             HTTP_REFERER: HTTP_REFERER, // path to page who referenced the form
             params: {
                 title: `Add ${HTTP_REFERER} Item`,
             },
-            fields: fields,
-            fk_fields: fKeyValues
-        });
+            fields: data
+        };
+        if('fKeys' in page_config[HTTP_REFERER]){
+            let temp = data;
+            let fields = temp.shift();
+            let fKeyValues = {};
+            let count = 0;
+            temp.forEach(arg => {
+                fKeyValues[fKeys[count].key] = [];
+                arg.forEach(obj => fKeyValues[fKeys[count].key].push(obj.value));
+                count += 1;
+            });
+            context.fields = fields;
+            context.fk_fields = fKeyValues;
+        }
+        res.status(200).render('add_table_form', context);
     });
 });
 
