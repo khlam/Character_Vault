@@ -14,55 +14,54 @@ router.get('/', (req, res, next) => {
 
 router.get('/add-form/:HTTP_REFERER', (req, res, next) => {
     let HTTP_REFERER = req.params.HTTP_REFERER;
-
-    // TODO will need to be replaced by a query that gets table field names
-    let fields = Object.keys(testData[HTTP_REFERER][0]);
-    res.status(200).render('add_table_form', {
-        // path to page who referenced the form
-        HTTP_REFERER: HTTP_REFERER,
-        params: {
-            title: `Add ${HTTP_REFERER} Item`
-        },
-        fields: fields
+    let db = req.app.get('db');
+    let queryStr = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${HTTP_REFERER}'`;
+    db.connect(queryStr, (data) => {
+        res.status(200).render('add_table_form', {
+            // path to page who referenced the form
+            HTTP_REFERER: HTTP_REFERER,
+            params: {
+                title: `Add ${HTTP_REFERER} Item`
+            },
+            fields: data
+        });
     });
 });
 
 router.post('/add-row', (req, res, next) => {
-    let destination = req.body.destination;
-    res.redirect(`/${destination}`);
+    let table = req.body.destination;
+    let data = req.body;
+    delete data.destination;
+    let columns = Object.keys(data).join(',');
+    let values = Object.values(data).map(value => `'${value}'`).join(',');
+    let db = req.app.get('db');
+    let queryStr = `INSERT INTO ${table} (${columns}) VALUES (${values})`;
+    db.connect(queryStr, (data) => {
+        console.log(data);
+    });
+    res.redirect(`/${table}`);
 });
 
 router.get('/search/:db_Name/:query', (req, res, next) => {
-    let dbName = req.params.db_Name
-    let query = req.params.query
-    let criteria = page_config[dbName].search
-    let searchCols = ""
+    let dbName = req.params.db_Name;
+    let query = req.params.query;
+    let criteria = page_config[dbName].search;
+    let searchCols = "";
     for (i in criteria) {
-        searchCols = searchCols + criteria[i] + ` LIKE '%${query}%'`
+        searchCols = searchCols + criteria[i] + ` LIKE '%${query}%'`;
         if (i != (criteria.length - 1))
         {
-            searchCols = searchCols + " OR "
+            searchCols = searchCols + " OR ";
         }
     }
 
     if (page_config[dbName]) {
-        let queryStr = `SELECT * FROM ${dbName} WHERE ${searchCols}`
+        let queryStr = `SELECT * FROM ${dbName} WHERE ${searchCols}`;
         let db = req.app.get('db');
-        console.log(queryStr)
-        db.pool.getConnection()
-        .then (conn => {
-            conn.query(queryStr)
-                .then( data =>{
-                    res.setHeader('Content-Type', 'application/json');
-                    res.end(JSON.stringify(data))
-                    conn.end();
-                })
-                .catch (e => {
-                    console.error('Query error:', e.message, e.stack);
-                    conn.end();
-                });
-        }).catch(e => {
-            console.error('Connection error:', e.message, e.stack);
+        console.log(queryStr);	
+		db.connect(queryStr, (data) => {
+			res.setHeader('Content-Type', 'application/json');
+			res.end(JSON.stringify(data));
         });
     }
 });

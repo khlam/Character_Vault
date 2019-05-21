@@ -5,8 +5,8 @@
             <legend>Item Information:</legend>
             {{#each fields}}
             <div>
-                <span>{{this}}</span>
-                <input name="{{this}}" type="text" value=""/>
+                <span>{{this.COLUMN_NAME}}</span>
+                <input name="{{this.COLUMN_NAME}}" type="text" value=""/>
             </div>
             {{/each}}
             <input type="submit" value="Submit">
