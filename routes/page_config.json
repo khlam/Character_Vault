@@ -2,7 +2,14 @@
     "characters":{
         "title":"Characters Table",
         "table_columns": 12,
-        "search": ["name", "race_id", "gender", "alignment"]
+        "search": ["name", "race_id", "gender", "alignment"],
+        "fKeys": [
+            {
+                "table": "race",
+                "idColumn": "name",
+                "key": "race_id"
+            }
+        ]
     },
     "class":{
         "title":"Classes Table",
@@ -22,12 +29,38 @@
     "character_class":{
         "title":"Character Classes Table",
         "table_columns":3,
-        "search": ["class_id"]
+        "search": ["class_id"],
+        "fKeys": [
+            {
+                "table": "characters",
+                "idColumn": "id",
+                "key":"character_id"
+            },
+            {
+                "table": "class",
+                "idColumn": "name",
+                "key":"class_id"
+            }
+        ]
     },
     "character_skill":{
         "title":"Character Skills Table",
         "table_columns":2,
-        "search": ["skill_id"]
+        "search": ["skill_id"],
+        "fKeys": [
+            {
+                "table": "characters",
+                "idColumn": "id",
+                "key":"character_id"
+
+            },
+            {
+                "table": "skill",
+                "idColumn": "name",
+                "key":"skill_id"
+
+            }
+        ]
     }
 }
 

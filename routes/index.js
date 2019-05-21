@@ -15,15 +15,22 @@ router.get('/', (req, res, next) => {
 router.get('/add-form/:HTTP_REFERER', (req, res, next) => {
     let HTTP_REFERER = req.params.HTTP_REFERER;
     let db = req.app.get('db');
-    let queryStr = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${HTTP_REFERER}'`;
+    let queryStr = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS `
+        + `WHERE TABLE_NAME = '${HTTP_REFERER}' AND COLUMN_NAME NOT LIKE '%id';`;
+    page_config[HTTP_REFERER].fKeys.forEach(fKey => {
+        queryStr += `SELECT ${fKey.idColumn} AS ${fKey.key} FROM ${fKey.table};`;
+    });
     db.connect(queryStr, (data) => {
+        let fKeyValues = data;
+        let fields = fKeyValues.shift();
+        console.log(fKeyValues);
         res.status(200).render('add_table_form', {
-            // path to page who referenced the form
-            HTTP_REFERER: HTTP_REFERER,
+            HTTP_REFERER: HTTP_REFERER, // path to page who referenced the form
             params: {
-                title: `Add ${HTTP_REFERER} Item`
+                title: `Add ${HTTP_REFERER} Item`,
             },
-            fields: data
+            fields: fields,
+            fk_fields: fKeyValues
         });
     });
 });

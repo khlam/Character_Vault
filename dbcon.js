@@ -5,7 +5,8 @@ const pool = db.createPool({
     password: process.env.DATABASE_PASSWORD,
     host: process.env.DATABASE_HOST,
     database: process.env.DATABASE_NAME,
-    connectionLimit: 10
+    connectionLimit: 10,
+    multipleStatements: true
 });
 
 connect = (sql, callback) => {
