@@ -4,7 +4,7 @@ let bodyParser = require('body-parser');
 let db = require('./dbcon.js');
 
 let app = express();
-let port = process.argv[2] || 5454;
+let port = process.env.SERVER_PORT || 5454;
 
 const hbs = handlebars.create({
   defaultLayout:'main',
