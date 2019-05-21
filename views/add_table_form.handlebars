@@ -3,6 +3,17 @@
         <input type="hidden" name="destination" value="{{HTTP_REFERER}}"/>
         <fieldset>
             <legend>Item Information:</legend>
+            {{#each fk_fields}}
+            <div>
+                <span>{{@key}}</span>
+                <select name="{{@key}}">
+                    <option value="Choose">Choose</option>
+                    {{#each this}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            {{/each}}
             {{#each fields}}
             <div>
                 <span>{{this.COLUMN_NAME}}</span>
