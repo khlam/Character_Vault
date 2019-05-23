@@ -53,7 +53,9 @@ router.post('/add-row', (req, res, next) => {
     let data = req.body;
     delete data.destination;
     let columns = Object.keys(data).join(',');
-    let values = Object.values(data).map(value => `'${value}'`).join(',');
+    console.log(data);
+    let values = Object.keys(data).map(key => `'${data[key]}'`).join(',');
+    console.log(values);
     let db = req.app.get('db');
     let queryStr = `INSERT INTO ${table} (${columns}) VALUES (${values})`;
     db.connect(queryStr, (data) => {
