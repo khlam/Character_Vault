@@ -33,7 +33,7 @@
         "fKeys": [
             {
                 "table": "characters",
-                "idColumn": "id",
+                "idColumn": "name",
                 "key":"character_id"
             },
             {
@@ -50,15 +50,13 @@
         "fKeys": [
             {
                 "table": "characters",
-                "idColumn": "id",
+                "idColumn": "name",
                 "key":"character_id"
-
             },
             {
                 "table": "skill",
                 "idColumn": "name",
                 "key":"skill_id"
-
             }
         ]
     }
