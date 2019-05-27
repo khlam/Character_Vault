@@ -26,6 +26,8 @@ app.set('view engine', 'handlebars');
 app.set('port', port);
 app.set('db', db);
 app.use('/', require('./routes/index')); // mount the index router
+app.use('/additem', require('./routes/additem')); // mount additem router
+app.use('/search', require('./routes/search')); // mount search router
 
 app.use(function(req,res){
   res.status(404);
