@@ -25,7 +25,11 @@ router.get('/:HTTP_REFERER', (req, res, next) => {
         + `WHERE TABLE_NAME = '${HTTP_REFERER}' AND COLUMN_NAME NOT LIKE '%id';`;
     if('fKeys' in page_config[HTTP_REFERER]){
         page_config[HTTP_REFERER].fKeys.forEach(fKey => {
-            queryStr += `SELECT ${fKey.idColumn} AS value FROM ${fKey.table};`;
+            if (fKey.hasOwnProperty("displayName")){
+                queryStr += `SELECT ${fKey.idColumn} AS value, ${fKey.displayName} AS name FROM ${fKey.table};`;
+            }else {
+                queryStr += `SELECT ${fKey.idColumn} AS value, ${fKey.idColumn} AS name FROM ${fKey.table};`;
+            }
         });
     }
     db.connect(queryStr, (data) => {
@@ -43,12 +47,18 @@ router.get('/:HTTP_REFERER', (req, res, next) => {
             let count = 0;
             temp.forEach(arg => {
                 fKeyValues[fKeys[count].key] = [];
-                arg.forEach(obj => fKeyValues[fKeys[count].key].push(obj.value));
+
+                arg.forEach(obj =>{
+                    console.log(obj)
+
+                    return fKeyValues[fKeys[count].key].push({value: obj.value, name: obj.name})
+                });
                 count += 1;
             });
             context.fields = fields;
             context.fk_fields = fKeyValues;
         }
+        console.log(context)
         res.status(200).render('add_table_form', context);
     });
 });

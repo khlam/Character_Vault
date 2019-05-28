@@ -33,8 +33,9 @@
         "fKeys": [
             {
                 "table": "characters",
-                "idColumn": "name",
-                "key":"character_id"
+                "idColumn": "id",
+                "key":"character_id",
+                "displayName": "name"
             },
             {
                 "table": "class",
@@ -50,8 +51,9 @@
         "fKeys": [
             {
                 "table": "characters",
-                "idColumn": "name",
-                "key":"character_id"
+                "idColumn": "id",
+                "key":"character_id",
+                "displayName": "name"
             },
             {
                 "table": "skill",
