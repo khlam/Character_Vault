@@ -12,6 +12,10 @@ const hbs = handlebars.create({
     ifequ: function (a, b, options) {
       if (a == b) { return options.fn(this); }
       return options.inverse(this);
+    },
+    ifnequ: function (a, b, options) {
+      if (a != b) { return options.fn(this); }
+      return options.inverse(this);
     }
   }
 });
@@ -28,6 +32,7 @@ app.set('db', db);
 app.use('/', require('./routes/index')); // mount the index router
 app.use('/additem', require('./routes/additem')); // mount additem router
 app.use('/search', require('./routes/search')); // mount search router
+app.use('/update', require('./routes/update'));
 
 app.use(function(req,res){
   res.status(404);
