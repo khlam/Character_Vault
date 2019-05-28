@@ -14,10 +14,12 @@
             </div>
             {{/each}}
             {{#each fields}}
-            <div>
-                <span>{{@key}}</span>
-                <input name="{{@key}}" type="text" value="{{this}}"/>
-            </div>
+            {{#ifnequ @key "id"}}
+                <div>
+                    <span>{{@key}}</span>
+                    <input name="{{@key}}" type="text" value="{{this}}"/>
+                </div>
+            {{/ifnequ}}
             {{/each}}
             <input type="submit" value="Submit">
         </fieldset>
