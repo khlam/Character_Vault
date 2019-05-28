@@ -1,5 +1,6 @@
 <div class="search-menu">
     <input id="searchbox" type="text" placeholder="Search" onkeyup="search()" value="">
+    <h1 id="error" class="errorText"></h1>
     <script>
         function search() {
             let input = document.getElementById("searchbox").value
@@ -9,18 +10,31 @@
             .then((out) => {
                 table = document.getElementsByName('content');
                 if (out.length != 0) {
+                    document.getElementById("error").innerText = ""
+                    delete_result()
+
                     for (i = 0; i < table.length; i++) {
                         table[i].style.display = "none"
                     }
-                    delete_result()
+                    
                     for (i in out){
                         document.getElementById("display_table").appendChild(add_item(out[i]))
+                    }
+
+                }else {
+                    document.getElementById("error").innerText = "No results found."
+                    delete_result()
+
+                    for (i = 0; i < table.length; i++) {
+                        table[i].style.display = ""
                     }
                 }
             })
 
             if (input == "") {
+                document.getElementById("error").innerText = ""
                 delete_result()
+
                 for (i = 0; i < table.length; i++) {
                     table[i].style.display = ""
                 }

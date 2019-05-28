@@ -1,24 +1,25 @@
 <div class="frame">
-    <form action="/additem/insert" method="post">
+    <form action="/update/update" method="post">
         <input type="hidden" name="destination" value="{{HTTP_REFERER}}"/>
         <fieldset>
             <legend>Item Information:</legend>
-            {{#each fk_fields}}
+            {{#each fkFields}}
             <div>
                 <span>{{@key}}</span>
                 <select name="{{@key}}">
-                    <option value="Choose">Choose</option>
                     {{#each this}}
-                    <option value="{{this.value}}">{{this.name}}</option>
+                    <option value="{{this.value}}">{{this.value}}</option>
                     {{/each}}
                 </select>
             </div>
             {{/each}}
             {{#each fields}}
-            <div>
-                <span>{{this.COLUMN_NAME}}</span>
-                <input name="{{this.COLUMN_NAME}}" type="text" value=""/>
-            </div>
+            {{#ifnequ @key "id"}}
+                <div>
+                    <span>{{@key}}</span>
+                    <input name="{{@key}}" type="text" value="{{this}}"/>
+                </div>
+            {{/ifnequ}}
             {{/each}}
             <input type="submit" value="Submit">
         </fieldset>

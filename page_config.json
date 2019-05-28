@@ -34,7 +34,8 @@
             {
                 "table": "characters",
                 "idColumn": "id",
-                "key":"character_id"
+                "key":"character_id",
+                "displayName": "name"
             },
             {
                 "table": "class",
@@ -51,14 +52,13 @@
             {
                 "table": "characters",
                 "idColumn": "id",
-                "key":"character_id"
-
+                "key":"character_id",
+                "displayName": "name"
             },
             {
                 "table": "skill",
                 "idColumn": "name",
                 "key":"skill_id"
-
             }
         ]
     }

@@ -4,7 +4,17 @@
     <span>{{this}}</span>
     {{/each}}
     {{#ifequ @root.params.title "Characters Table"}}
-        <span><button type="button">Edit</button></span>
-        <span><button type="button">Delete</button></span>
+    <span>
+        <form action="/update/{{@root.url}}" method="post">
+            <input type="hidden" name="itemid" value="{{this.id}}"/>
+            <button type="submit" type="button">Edit</button>
+        </form>
+    </span>
+    <span>
+        <form action="/update/{{@root.url}}" method="post">
+            <input type="hidden" name="item-id" value="{{this.id}}"/>
+            <button type="submit" type="button">Delete</button>
+        </form>
+    </span>
     {{/ifequ}}
 </div>
