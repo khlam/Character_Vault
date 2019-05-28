@@ -49,8 +49,6 @@ router.get('/:HTTP_REFERER', (req, res, next) => {
                 fKeyValues[fKeys[count].key] = [];
 
                 arg.forEach(obj =>{
-                    console.log(obj)
-
                     return fKeyValues[fKeys[count].key].push({value: obj.value, name: obj.name})
                 });
                 count += 1;
