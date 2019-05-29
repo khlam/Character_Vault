@@ -9,6 +9,36 @@
                 "idColumn": "name",
                 "key": "race_id"
             }
+        ],
+        "input_type": [
+            {
+                "COLUMN_NAME": "healthpoints",
+                "TYPE": "number"
+            },
+            {
+                "COLUMN_NAME": "strength",
+                "TYPE": "number"
+            },
+            {
+                "COLUMN_NAME": "dexterity",
+                "TYPE": "number"
+            },
+            {
+                "COLUMN_NAME": "constitution",
+                "TYPE": "number"
+            },
+            {
+                "COLUMN_NAME": "intelligence",
+                "TYPE": "number"
+            },
+            {
+                "COLUMN_NAME": "wisdom",
+                "TYPE": "number"
+            },
+            {
+                "COLUMN_NAME": "charisma",
+                "TYPE": "number"
+            }
         ]
     },
     "class":{
@@ -41,6 +71,12 @@
                 "table": "class",
                 "idColumn": "name",
                 "key":"class_id"
+            }
+        ],
+        "input_type": [
+            {
+                "COLUMN_NAME": "level",
+                "TYPE": "number"
             }
         ]
     },
