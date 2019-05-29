@@ -8,6 +8,7 @@
             <div>
                 <span>{{@key}}</span>
                 <select name="{{@key}}">
+                    
                     {{#each this}}
                     <option value="{{this.value}}">{{this.value}}</option>
                     {{/each}}
@@ -18,7 +19,7 @@
             {{#ifnequ @key "id"}}
                 <div>
                     <span>{{@key}}</span>
-                    <input name="{{@key}}" type="text" value="{{this}}"/>
+                    <input name="{{@key}}" type="{{this.TYPE}}" value="{{this.value}}"/>
                 </div>
             {{/ifnequ}}
             {{/each}}

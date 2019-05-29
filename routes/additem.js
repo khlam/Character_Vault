@@ -20,6 +20,7 @@ router.post('/insert', (req, res, next) => {
 router.get('/:HTTP_REFERER', (req, res, next) => {
     let HTTP_REFERER = req.params.HTTP_REFERER;
     let fKeys = page_config[HTTP_REFERER].fKeys;
+    let input_type = page_config[HTTP_REFERER].input_type;
     let db = req.app.get('db');
     let queryStr = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS `
         + `WHERE TABLE_NAME = '${HTTP_REFERER}' AND COLUMN_NAME NOT LIKE '%id';`;
@@ -40,6 +41,7 @@ router.get('/:HTTP_REFERER', (req, res, next) => {
             },
             fields: data
         };
+
         if('fKeys' in page_config[HTTP_REFERER]){
             let temp = data;
             let fields = temp.shift();
@@ -53,10 +55,32 @@ router.get('/:HTTP_REFERER', (req, res, next) => {
                 });
                 count += 1;
             });
+
+            fields.forEach(function(val, i) {   // Default input type to text
+                fields[i] = {"COLUMN_NAME": fields[i].COLUMN_NAME, "TYPE": "text"}
+            })
+            
+            if('input_type' in page_config[HTTP_REFERER]){ // If column name in input_type in page_config.json, replace the entry.
+                fields.forEach(function(val, i) {
+                    console.log(fields[i])
+                    input_type.forEach( function(col, j){
+                        if (fields[i].COLUMN_NAME === input_type[j].COLUMN_NAME) {
+                            fields[i] = input_type[j]
+                        }
+                    })
+                })
+            }
+
             context.fields = fields;
             context.fk_fields = fKeyValues;
+        }else {
+            context.fields.forEach(function(val, i) {   // Default input type to text
+                context.fields[i] = {"COLUMN_NAME": context.fields[i].COLUMN_NAME, "TYPE": "text"}
+            })
         }
-        console.log(context)
+
+
+        console.log(context.fields)
         res.status(200).render('add_table_form', context);
     });
 });

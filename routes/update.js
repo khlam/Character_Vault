@@ -21,6 +21,7 @@ router.post('/:HTTP_REFERER', (req, res, next) => {
     let HTTP_REFERER = req.params.HTTP_REFERER;
     let itemId = req.body.itemid;
     let fKeys = page_config[HTTP_REFERER].fKeys;
+    let input_type = page_config[HTTP_REFERER].input_type;
     let db = req.app.get('db');
 
     let queryStr = `SELECT * `
@@ -28,7 +29,7 @@ router.post('/:HTTP_REFERER', (req, res, next) => {
         + `WHERE id = ${itemId};`;
 
     if('fKeys' in page_config[HTTP_REFERER]){
-        page_config[HTTP_REFERER].fKeys.forEach(fKey => {
+        fKeys.forEach(fKey => {
             queryStr += `SELECT ${fKey.idColumn} AS value FROM ${fKey.table};`;
         });
     }
@@ -36,12 +37,23 @@ router.post('/:HTTP_REFERER', (req, res, next) => {
     db.connect(queryStr, (data) => {
         let itemData = data.shift().shift();
         let fkData = {};
-        page_config[HTTP_REFERER].fKeys.forEach (fKey => {
+        fKeys.forEach (fKey => {
             fkData[fKey.key] = data.shift();
             fkData[fKey.key].unshift({value: itemData[fKey.key]});
             delete itemData[fKey.key];
         });
+ 
+        for (key in itemData) {
+            itemData[key] = {"value": itemData[key], "TYPE": "string"}
+            input_type.forEach( function(col, j){
+                if (key === input_type[j].COLUMN_NAME) {
+                    itemData[key] = {"value": itemData[key].value, "TYPE": input_type[j].TYPE}
+                }
+            }) 
+        }
 
+        console.log(itemData)
+        
         let context = {
             HTTP_REFERER: HTTP_REFERER, // path to page who referenced the form
             params: {
