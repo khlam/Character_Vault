@@ -1,6 +1,7 @@
 <div class="frame">
     <form action="/update/update" method="post">
         <input type="hidden" name="destination" value="{{HTTP_REFERER}}"/>
+        <input type="hidden" name="itemId" value="{{itemId}}"/>
         <fieldset>
             <legend>Item Information:</legend>
             {{#each fkFields}}

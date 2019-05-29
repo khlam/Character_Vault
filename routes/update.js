@@ -2,19 +2,19 @@ const router = require('express').Router();
 const page_config = require('../page_config');
 
 router.post('/update', (req, res, next) => {
-    // let table = req.body.destination;
-    // let data = req.body;
-    // delete data.destination;
-    // let columns = Object.keys(data).join(',');
-    // console.log(data);
-    // let values = Object.keys(data).map(key => `'${data[key]}'`).join(',');
-    // console.log(values);
-    // let db = req.app.get('db');
-    // let queryStr = `INSERT INTO ${table} (${columns}) VALUES (${values})`;
-    // db.connect(queryStr, (data) => {
-    //     console.log(data);
-    // });
-    // res.redirect(`/${table}`);
+    let table = req.body.destination;
+    let itemId = req.body.itemId;
+    let data = req.body;
+    delete data.destination;
+    delete data.itemId;
+    let columns = Object.keys(data).map(key => `${key} = '${data[key]}'`).join(', ');
+    let queryStr = `UPDATE ${table} ` +
+        `SET ${columns} ` +
+        `WHERE id = ${itemId}`;
+
+    let db = req.app.get('db');
+    db.connect(queryStr, data => console.log(data));
+    res.redirect(`/${table}`);
 });
 
 router.post('/:HTTP_REFERER', (req, res, next) => {
@@ -48,7 +48,8 @@ router.post('/:HTTP_REFERER', (req, res, next) => {
                 title: `Update ${HTTP_REFERER} Item`,
             },
             fields: itemData,
-            fkFields: fkData
+            fkFields: fkData,
+            itemId: itemId
         };
         res.status(200).render('edit_table_form', context);
     });
