@@ -39,3 +39,6 @@ SELECT * FROM :dbName WHERE :searchCols LIKE :queryString
 
 -- Add-form
 SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :HTTP_REFERER AND COLUMN_NAME NOT LIKE :id;
+
+-- Update table generic
+UPDATE :table SET :column_name WHERE id = :itemID
