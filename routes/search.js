@@ -16,7 +16,7 @@ router.get('/:db_Name/:query', (req, res, next) => {
     if (page_config[dbName]) {
         let queryStr = `SELECT * FROM ${dbName} WHERE ${searchCols}`;
         let db = req.app.get('db');
-        console.log(queryStr);
+        //console.log(queryStr);
         db.connect(queryStr, (data) => {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(data));
