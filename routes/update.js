@@ -51,8 +51,6 @@ router.post('/:HTTP_REFERER', (req, res, next) => {
                 }
             }) 
         }
-
-        console.log(itemData)
         
         let context = {
             HTTP_REFERER: HTTP_REFERER, // path to page who referenced the form

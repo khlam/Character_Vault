@@ -11,8 +11,8 @@
         </form>
     </span>
     <span>
-        <form action="/update/{{@root.url}}" method="post">
-            <input type="hidden" name="item-id" value="{{this.id}}"/>
+        <form action="/delete/{{@root.url}}" method="post">
+            <input type="hidden" name="delID" value="{{this.id}}"/>
             <button type="submit" type="button">Delete</button>
         </form>
     </span>
