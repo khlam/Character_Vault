@@ -7,8 +7,7 @@ router.post('/insert', (req, res, next) => {
     delete data.destination;
     let columns = Object.keys(data).join(',');
     console.log(data);
-    let values = Object.keys(data).map(key => `'${data[key]}'`).join(',');
-    console.log(values);
+    let values = Object.keys(data).map(key => data[key] ? `'${data[key]}'` : `'10'`).join(',');
     let db = req.app.get('db');
     let queryStr = `INSERT INTO ${table} (${columns}) VALUES (${values})`;
     db.connect(queryStr, (data) => {
@@ -51,36 +50,36 @@ router.get('/:HTTP_REFERER', (req, res, next) => {
                 fKeyValues[fKeys[count].key] = [];
 
                 arg.forEach(obj =>{
-                    return fKeyValues[fKeys[count].key].push({value: obj.value, name: obj.name})
+                    return fKeyValues[fKeys[count].key].push({value: obj.value, name: obj.name});
                 });
                 count += 1;
             });
 
             fields.forEach(function(val, i) {   // Default input type to text
-                fields[i] = {"COLUMN_NAME": fields[i].COLUMN_NAME, "TYPE": "text"}
-            })
-            
+                fields[i] = {"COLUMN_NAME": fields[i].COLUMN_NAME, "TYPE": "text"};
+            });
+
             if('input_type' in page_config[HTTP_REFERER]){ // If column name in input_type in page_config.json, replace the entry.
                 fields.forEach(function(val, i) {
-                    console.log(fields[i])
+                    console.log(fields[i]);
                     input_type.forEach( function(col, j){
                         if (fields[i].COLUMN_NAME === input_type[j].COLUMN_NAME) {
-                            fields[i] = input_type[j]
+                            fields[i] = input_type[j];
                         }
-                    })
-                })
+                    });
+                });
             }
 
             context.fields = fields;
             context.fk_fields = fKeyValues;
         }else {
             context.fields.forEach(function(val, i) {   // Default input type to text
-                context.fields[i] = {"COLUMN_NAME": context.fields[i].COLUMN_NAME, "TYPE": "text"}
-            })
+                context.fields[i] = {"COLUMN_NAME": context.fields[i].COLUMN_NAME, "TYPE": "text"};
+            });
         }
 
 
-        console.log(context.fields)
+        console.log(context.fields);
         res.status(200).render('add_table_form', context);
     });
 });
