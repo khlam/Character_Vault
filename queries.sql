@@ -42,3 +42,6 @@ SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :HTTP_REFE
 
 -- Update table generic
 UPDATE :table SET :column_name WHERE id = :itemID
+
+-- Delete from character_skill table
+DELETE FROM :tablename WHERE character_id = :id, AND skill_id = :id
