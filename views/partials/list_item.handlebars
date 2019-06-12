@@ -17,4 +17,13 @@
         </form>
     </span>
     {{/ifequ}}
+
+    {{#ifequ @root.params.title "Character Skills Table"}}
+    <span>
+        <form action="/delete/{{@root.url}}" method="post">
+            <input type="hidden" name="delID" value="{{this.character_id}},{{this.skill_id}}"/>
+            <button type="submit" type="button">Delete</button>
+        </form>
+    </span>
+    {{/ifequ}}
 </div>
