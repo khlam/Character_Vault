@@ -3,7 +3,8 @@ const router = require('express').Router();
 router.post('/:HTTP_REFERER', (req, res, next) => {
     let HTTP_REFERER = req.params.HTTP_REFERER;
     console.log(req.body.delID);
-    let delID = req.body.delID.split(',');
+    // below removes appending prepending commas, splits on comma.
+    let delID = req.body.delID.replace(/(^,)|(,$)/g, "").split(','); 
     console.log("HTTP_REFERER ", HTTP_REFERER);
     console.log("delID ", delID);
 
@@ -18,7 +19,11 @@ router.post('/:HTTP_REFERER', (req, res, next) => {
         queryStr = `DELETE `
             +`FROM ${HTTP_REFERER} `
             + `WHERE character_id = ${delID[0]} AND skill_id = '${delID[1]}';`;
-    }
+    } else if (HTTP_REFERER == 'race'){
+        queryStr = `DELETE `
+            +`FROM ${HTTP_REFERER} `
+            + `WHERE name = '${delID}';`;
+}
 
     db.connect(queryStr, (data) => {
         res.redirect(`/${HTTP_REFERER}`);
