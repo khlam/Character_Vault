@@ -24,7 +24,7 @@
      #+END_SRC
   3. Run the server with local forever module
      #+BEGIN_SRC bash
-       ./node_modules/forever/bin/forever start diagnostic.js {port number goes here}
+       ./node_modules/forever/bin/forever start server.js {port number goes here}
      #+END_SRC
    
 * Adding a new page 
